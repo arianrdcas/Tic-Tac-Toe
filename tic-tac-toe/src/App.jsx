@@ -2,12 +2,25 @@ import { useState } from "react";
 import { Fragment } from "react";
 import "./App.css";
 
+const Turns = {
+  X: "X",
+  O: "O",
+};
+
+
+
+const Cuadricula = ({ children, updateCuadricula, index }) => {
+  return <div className="cuadricula">{children}</div>;
+};
+
+
+
 function App() {
-  /* const [jugador1, setJugador1] = useState("");
-  const [jugador2, setJugador2] = useState(""); */
 
   const [jugadores, setJugadores] = useState({ jugador1: "", jugador2: "" });
   const [nombresGuardados, setNombresGuardados] = useState(false);
+  const [turn, setTurn] = useState(Turns.X)
+
 
   const guardarNombres = (e) => {
     e.preventDefault();
@@ -22,16 +35,8 @@ function App() {
     }));
   };
 
-  const Turn = {
-    X: "x",
-    O: "o",
-  };
-
-  const board = Array(9).fill(null);
-
-  const Cuadricula = ({ children, updateCuadricula, index }) => {
-    return <div className="cuadricula">{children}</div>;
-  };
+  const [board, setBoard] = useState(Array(9).fill(null));
+  
 
   return (
     <Fragment>
@@ -40,15 +45,16 @@ function App() {
           <h1 className="nombre-juego">Tic Tac Toe</h1>
           {nombresGuardados ? (
             <div>
-              <h1>{jugadores.jugador1}</h1>
-              <h1>{jugadores.jugador2}</h1>
+              <h2>Jugador 1 :</h2>
+              <h3 className="jugador1">{jugadores.jugador1}</h3>
+              <h2>Jugador 2 :</h2>
+              <h3>{jugadores.jugador2}</h3>
             </div>
           ) : (
             <form onSubmit={guardarNombres}>
               <p>Jugador 1:</p>
               <input
                 type="text"
-                placeholder="Nombre jugador 1"
                 name="jugador1"
                 value={jugadores.jugador1}
                 onChange={handleInputChange}
@@ -56,7 +62,6 @@ function App() {
               <p style={{ marginTop: "10px" }}>Jugador 2:</p>
               <input
                 type="text"
-                placeholder="Nombre jugador 2"
                 name="jugador2"
                 value={jugadores.jugador2}
                 onChange={handleInputChange}
@@ -69,9 +74,13 @@ function App() {
         </div>
         <div className="square">
           {board.map((_, index) => {
-            return <Cuadricula key={index}>{index}</Cuadricula>;
+            return <Cuadricula key={index}>{board[index]}</Cuadricula>;
           })}
         </div>
+        <section id="turno-jugador">
+          <Cuadricula isSelected={turn === Turns.X}>{Turns.X}</Cuadricula>
+          <Cuadricula>{Turns.O}</Cuadricula>
+        </section>
       </div>
     </Fragment>
   );

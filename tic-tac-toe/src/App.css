@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color:#9400D3;
+  background-color: #9400d3;
 }
 
 .ventana {
@@ -23,28 +23,27 @@
   margin-top: 20px;
 }
 
-p{
+p {
   margin-bottom: 10px;
-  
 }
 
-form{
+form {
   display: grid;
 }
 
-input{
+input {
   border: 2px solid white;
   border-radius: 3px;
   height: 25px;
-  text-align: center; 
+  text-align: center;
 }
 
 input:focus {
   border: 3px solid black;
   outline: none;
-}  
+}
 
-.boton-guardar{
+.boton-guardar {
   height: 23px;
   font-size: 13px;
   color: white;
@@ -54,6 +53,10 @@ input:focus {
   cursor: pointer;
   margin-top: 10px;
   border-radius: 3px;
+}
+
+.jugador1 {
+  margin-bottom: 15px;
 }
 
 .square {
@@ -80,4 +83,14 @@ input:focus {
 .cuadricula:hover {
   filter: opacity(0.9);
   transform: scale(1.03);
+}
+
+#turno-jugador {
+  height: 30px;
+  width: 30px;
+  display: inline-flex;
+  grid-column: 2/3;
+  justify-content: space-around;
+  gap: 10px;
+  align-items: start;
 }
