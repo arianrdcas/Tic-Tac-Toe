@@ -25,6 +25,11 @@
 
 p{
   margin-bottom: 10px;
+  
+}
+
+form{
+  display: grid;
 }
 
 input{
@@ -35,9 +40,21 @@ input{
 }
 
 input:focus {
-  border: 3px solid #43fb00;
+  border: 3px solid black;
   outline: none;
 }  
+
+.boton-guardar{
+  height: 23px;
+  font-size: 13px;
+  color: white;
+  background-color: rgb(4, 0, 128);
+  box-sizing: border-box;
+  border: 1px solid black;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 3px;
+}
 
 .square {
   grid-column: 2/3;
@@ -48,7 +65,7 @@ input:focus {
   justify-content: center;
   color: black;
   gap: 5px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .cuadricula {
