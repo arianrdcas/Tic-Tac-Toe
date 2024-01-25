@@ -11,6 +11,14 @@
   grid-template-rows: 200px 350px 150px;
 }
 
+.nombre-juego{
+    display: grid;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    justify-items: center;
+}
+
+
 .jugadores {
   justify-items: center;
   align-items: center;
@@ -83,6 +91,11 @@ input:focus {
 .cuadricula:hover {
   filter: opacity(0.9);
   transform: scale(1.03);
+}
+
+.cuadricula.is-selected{
+  background: black;
+  color: white;
 }
 
 #turno-jugador {
