@@ -7,11 +7,11 @@ const Turns = {
   O: "O",
 };
 
-const Cuadricula = ({ children, isSelected, actualizarCuadricula, index }) => {
+const Cuadricula = ({ children, isSelected, updateCuadricula, index }) => {
   const className = `cuadricula ${isSelected ? "is-selected" : ""}`;
 
   const handleClick = () => {
-    actualizarCuadricula(index);
+    updateCuadricula(index);
   };
 
   return (
@@ -21,7 +21,7 @@ const Cuadricula = ({ children, isSelected, actualizarCuadricula, index }) => {
   );
 };
 
-const comboGanador = [
+const winningCombinations = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -33,62 +33,47 @@ const comboGanador = [
 ];
 
 function App() {
-  const [jugadores, setJugadores] = useState({ jugador1: "", jugador2: "" });
-  const [nombresGuardados, setNombresGuardados] = useState(false);
+
   const [turn, setTurn] = useState(Turns.X);
-
-  const guardarNombres = (e) => {
-    e.preventDefault();
-    setNombresGuardados(true);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setJugadores((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [ganador, setGanador] = useState(null);
+  const [winner, setWinner] = useState(null);
 
-  const revisarGanador = (cuadriculaCheck) => {
-    for (const combo of comboGanador) {
+  const checkWinner = (gridCheck) => {
+    for (const combo of winningCombinations) {
       const [a, b, c] = combo;
       if (
-        cuadriculaCheck[a] &&
-        cuadriculaCheck[a] === cuadriculaCheck[b] &&
-        cuadriculaCheck[a] === cuadriculaCheck[c]
+        gridCheck[a] &&
+        gridCheck[a] === gridCheck[b] &&
+        gridCheck[a] === gridCheck[c]
       ) {
-        return cuadriculaCheck[a];
+        return gridCheck[a];
       }
     }
     return null;
   };
 
-  const reiniciarJuego = () => {
+  const restartGame = () => {
     setBoard(Array(9).fill(null));
     setTurn(Turns.X);
-    setGanador(null);
+    setWinner(null);
   };
 
-  const checkEndGame = (nuevoBoard) => {
-    return nuevoBoard.every((cuadricula) => cuadricula !== null);
+  const checkEndGame = (newBoard) => {
+    return newBoard.every((cuadricula) => cuadricula !== null);
   };
 
-  const actualizarCuadricula = (index) => {
-    if (board[index] || ganador) return;
-    const nuevoBoard = [...board];
-    nuevoBoard[index] = turn;
-    setBoard(nuevoBoard);
-    const nuevoTurno = turn === Turns.X ? Turns.O : Turns.X;
-    setTurn(nuevoTurno);
-    const nuevoGanador = revisarGanador(nuevoBoard);
-    if (nuevoGanador) {
-      setGanador(nuevoGanador);
-    } else if (checkEndGame(nuevoBoard)) {
-      setGanador(false);
+  const updateCuadricula = (index) => {
+    if (board[index] || winner) return;
+    const newBoard = [...board];
+    newBoard[index] = turn;
+    setBoard(newBoard);
+    const newTurn = turn === Turns.X ? Turns.O : Turns.X;
+    setTurn(newTurn);
+    const newWinner = checkWinner(newBoard);
+    if (newWinner) {
+      setWinner(newWinner);
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false);
     }
   };
 
@@ -96,36 +81,6 @@ function App() {
     <Fragment>
       <div className="ventana">
         <h1 className="nombre-juego">Tic Tac Toe</h1>
-        {/* <div className="jugadores">     
-          {nombresGuardados ? (
-            <div>
-              <h2>Jugador 1 </h2>
-              <h3 className="jugador1">{jugadores.jugador1}</h3>
-              <h2>Jugador 2 </h2>
-              <h3>{jugadores.jugador2}</h3>
-            </div>
-          ) : (
-            <form onSubmit={guardarNombres}>
-              <p>Jugador 1:</p>
-              <input
-                type="text"
-                name="jugador1"
-                value={jugadores.jugador1}
-                onChange={handleInputChange}
-              />
-              <p style={{ marginTop: "10px" }}>Jugador 2:</p>
-              <input
-                type="text"
-                name="jugador2"
-                value={jugadores.jugador2}
-                onChange={handleInputChange}
-              />
-              <button className="boton-guardar" type="submit">
-                Guardar nombres
-              </button>
-            </form>
-          )}
-        </div> */}
         <section>
           <Cuadricula isSelected={turn === Turns.X}>{Turns.X}</Cuadricula>
           <Cuadricula isSelected={turn === Turns.O}>{Turns.O}</Cuadricula>
@@ -136,7 +91,7 @@ function App() {
               <Cuadricula
                 key={index}
                 index={index}
-                actualizarCuadricula={actualizarCuadricula}
+                updateCuadricula={updateCuadricula}
               >
                 {board[index]}
               </Cuadricula>
@@ -144,12 +99,12 @@ function App() {
           })}
         </div>
         <section>
-          {ganador !== null && (
-            <h2>{ganador === false ? "Empate" : "Gano " + ganador}</h2>
+          {winner !== null && (
+            <h2>{winner === false ? "Empate" : "Ganó: " + winner}</h2>
           )}
         </section>
         <footer>
-          <button onClick={reiniciarJuego}>Reiniciar juego</button>
+          <button onClick={restartGame}>Reiniciar juego</button>
         </footer>
       </div>
     </Fragment>
