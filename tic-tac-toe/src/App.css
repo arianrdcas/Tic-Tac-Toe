@@ -8,16 +8,27 @@
 .ventana {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 200px 350px 150px;
+  grid-template-rows: 150px 350px 150px;
 }
 
-.nombre-juego{
-    display: grid;
-    grid-column: 2/3;
-    grid-row: 1/2;
-    justify-items: center;
+.seccion-nombre-ganador {
+  display: flex;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
+.nombre-juego {
+  display: flex;
+  align-self: center;
+}
+
+.winner {
+  display: flex;
+  justify-self: end;
+  align-self: center;
+}
 
 .jugadores {
   justify-items: center;
@@ -93,9 +104,11 @@ input:focus {
   transform: scale(1.03);
 }
 
-.cuadricula.is-selected{
+.cuadricula.is-selected {
   background: black;
   color: white;
+  width: 50px;
+  height: 50px;
 }
 
 #turno-jugador {
@@ -107,3 +120,23 @@ input:focus {
   gap: 10px;
   align-items: start;
 }
+
+footer {
+  display: flex;
+  flex-direction: column;
+  grid-row: 3/4;
+  grid-column: 2/3;
+  gap: 20px;
+}
+
+.restart-game {
+  width: 120px;
+  align-self: center;
+}
+
+.turn-player {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+

@@ -80,11 +80,14 @@ function App() {
   return (
     <Fragment>
       <div className="ventana">
-        <h1 className="nombre-juego">Tic Tac Toe</h1>
-        <section>
-          <Cuadricula isSelected={turn === Turns.X}>{Turns.X}</Cuadricula>
-          <Cuadricula isSelected={turn === Turns.O}>{Turns.O}</Cuadricula>
-        </section>
+        <div className="seccion-nombre-ganador">
+          <h1 className="nombre-juego">Tic Tac Toe</h1>
+          <section className="winner">
+            {winner !== null && (
+              <h2>{winner === false ? "Empate" : "Ganó: " + winner}</h2>
+            )}
+          </section>
+        </div>
         <div className="square">
           {board.map((_, index) => {
             return (
@@ -98,13 +101,18 @@ function App() {
             );
           })}
         </div>
-        <section>
-          {winner !== null && (
-            <h2>{winner === false ? "Empate" : "Ganó: " + winner}</h2>
-          )}
-        </section>
         <footer>
-          <button onClick={restartGame}>Reiniciar juego</button>
+          <button className="restart-game" onClick={restartGame}>
+            Reiniciar juego
+          </button>
+          <section className="turn-player">
+            <Cuadricula  isSelected={turn === Turns.X}>
+              {Turns.X}
+            </Cuadricula>
+            <Cuadricula  isSelected={turn === Turns.O}>
+              {Turns.O}
+            </Cuadricula>
+          </section>
         </footer>
       </div>
     </Fragment>
