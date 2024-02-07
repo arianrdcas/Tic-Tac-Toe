@@ -30,52 +30,8 @@
   align-self: center;
 }
 
-.jugadores {
-  justify-items: center;
-  align-items: center;
-  grid-column: 2/3;
-  grid-row: 1/2;
-  text-align: center;
-  color: black;
-  display: inline-grid;
-  gap: 15px;
-  margin-top: 20px;
-}
-
 p {
   margin-bottom: 10px;
-}
-
-form {
-  display: grid;
-}
-
-input {
-  border: 2px solid white;
-  border-radius: 3px;
-  height: 25px;
-  text-align: center;
-}
-
-input:focus {
-  border: 3px solid black;
-  outline: none;
-}
-
-.boton-guardar {
-  height: 23px;
-  font-size: 13px;
-  color: white;
-  background-color: rgb(4, 0, 128);
-  box-sizing: border-box;
-  border: 1px solid black;
-  cursor: pointer;
-  margin-top: 10px;
-  border-radius: 3px;
-}
-
-.jugador1 {
-  margin-bottom: 15px;
 }
 
 .square {
@@ -122,15 +78,16 @@ input:focus {
 }
 
 footer {
-  display: flex;
-  flex-direction: column;
-  grid-row: 3/4;
-  grid-column: 2/3;
-  gap: 20px;
+      display: flex;
+    flex-direction: column;
+    grid-row: 3/4;
+    grid-column: 2/3;
+    gap: 40px;
+    justify-content: center;
 }
 
 .restart-game {
-  color:black;
+  color: black;
   width: 120px;
   align-self: center;
   height: 30px;
@@ -144,7 +101,7 @@ footer {
   font-weight: bold;
 }
 
-.restart-game:hover{
+.restart-game:hover {
   color: white;
   font-weight: bold;
   background: #2079b0;
@@ -154,10 +111,36 @@ footer {
   background-image: -o-linear-gradient(top, #2079b0, #eb94d0);
   background-image: linear-gradient(to bottom, #2079b0, #eb94d0);
   text-decoration: none;
-cursor: pointer;
+  cursor: pointer;
 }
 
-.turn-player {
+.cuadriculaturn {
+  display: grid;
+  border: 2px solid white;
+  border-radius: 5px;
+  align-items: center;
+  justify-items: center;
+  cursor: pointer;
+}
+
+.cuadriculaturn.is-selected {
+  background: black;
+  color: white;
+  width: 50px;
+  height: 50px;
+}
+
+.cuadriculaturn.no-selected {
+  display: grid;
+    border: 2px solid white;
+    border-radius: 5px;
+    align-items: center;
+    justify-items: center;
+    height: 50px;
+    width: 50px;
+}
+
+.turno {
   display: flex;
   flex-direction: row;
   justify-content: space-around;

@@ -7,8 +7,8 @@ const Turns = {
   O: "O",
 };
 
-const Cuadricula = ({ children, isSelected, updateCuadricula, index }) => {
-  const className = `cuadricula ${isSelected ? "is-selected" : ""}`;
+const Cuadricula = ({ children, updateCuadricula, index,}) => {
+  const className = "cuadricula";
 
   const handleClick = () => {
     updateCuadricula(index);
@@ -20,6 +20,12 @@ const Cuadricula = ({ children, isSelected, updateCuadricula, index }) => {
     </div>
   );
 };
+
+const CuadriculaTurn = ({ children,isSelected }) => {
+  const className = `cuadriculaturn ${isSelected ? "is-selected" : "no-selected"}`;
+  return <div className={className}>{children}</div>;
+};
+
 
 const winningCombinations = [
   [0, 1, 2],
@@ -105,13 +111,13 @@ function App() {
           <button className="restart-game" onClick={restartGame}>
             Reiniciar juego
           </button>
-          <section className="turn-player">
-            <Cuadricula  isSelected={turn === Turns.X}>
+          <section className="turno">
+            <CuadriculaTurn isSelected={turn === Turns.X}>
               {Turns.X}
-            </Cuadricula>
-            <Cuadricula  isSelected={turn === Turns.O}>
+            </CuadriculaTurn>
+            <CuadriculaTurn isSelected={turn === Turns.O}>
               {Turns.O}
-            </Cuadricula>
+            </CuadriculaTurn>
           </section>
         </footer>
       </div>
